@@ -14,12 +14,15 @@ class TEP extends StatefulWidget {
 class Estado extends State<TEP> {
   String nombre = " ";
   bool hasTenidoTos = false;
+  bool hasTenidoTemperatura = false;
+  String turno = " ";
+  double edad = 18;
   TextEditingController nombreControlador = TextEditingController();
   @override
   Widget build(BuildContext context) => MaterialApp(
           home: Scaffold(
             appBar: AppBar(
-            title: Text(" $nombre $hasTenidoTos"),
+            title: Text(" $nombre $hasTenidoTos $hasTenidoTemperatura $turno $edad"),
             ),
             body: Column(
               children: [
@@ -38,14 +41,69 @@ class Estado extends State<TEP> {
                   ),
                 ),
 
-                Text("Has tenido tos en el ultimo mes"),
-                Checkbox(
+                CheckboxListTile(
+                    title: Text("Has tenido tos en el ultimo mes"),
                     value: hasTenidoTos,
                     onChanged: (bool? value){
                       setState(() {
                         hasTenidoTos =  value!;
                       });
                     }
+                ),
+
+                SwitchListTile(
+                    title: Text("Has tenido temperatura en el ultimo mes"),
+                    value: hasTenidoTemperatura,
+                    onChanged: (bool? value){
+                      setState(() {
+                        hasTenidoTemperatura = value!;
+                      });
+                    }
+                ),
+
+                RadioListTile(
+                  title: Text("Matutino"),
+                    value: "Matutino",
+                    groupValue: turno,
+                    onChanged: (value){
+                      setState(() {
+                        turno = value.toString();
+                      });
+                    },
+                ),
+                RadioListTile(
+                  title: Text("Vespertino"),
+                  value: "Vespertino",
+                  groupValue: turno,
+                  onChanged: (value){
+                    setState(() {
+                      turno = value.toString();
+                    });
+                  },
+                ),
+                RadioListTile(
+                  title: Text("Mixto"),
+                  value: "Mixto",
+                  groupValue: turno,
+                  onChanged: (value){
+                    setState(() {
+                      turno = value.toString();
+                    });
+                  },
+                ),
+
+                Text("Slecciona tu edad"),
+                Slider(
+                    value: edad,
+                    min: 18.0,
+                    max: 25.0,
+                    divisions: 7,
+                    label: edad.toString(),
+                    onChanged: (double value){
+                      setState(() {
+                        edad = value;
+                      });
+                    },
                 ),
 
                 ElevatedButton(
